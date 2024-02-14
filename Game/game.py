@@ -9,8 +9,10 @@ screen_hight = 720
 
 screen = pygame.display.set_mode((screen_width, screen_hight))
 
-# font = pygame.font.SysFont("Goudy Stout обычный", 50)
+font = pygame.font.SysFont("TimesNewRoman", 100)
 font2 = pygame.font.SysFont("TimesNewRoman", 30)
+
+
 
 score = 0
 
@@ -136,15 +138,11 @@ while True:
     antihero()
     
     if img_x1 < img_x + 71 and img_x1 + 71 > img_x and img_y1 < img_y + 71 and img_y1 + 71 > img_y:
+        text2 = font.render("Game Over", True, (255,0,0))
+        screen.blit(text2, (300, 230))
         speed = 0
         speed2 = 0
-        print(1)
         sound_stop.play()
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
 
     if img_x1 < x_bull + 70 and img_x1 + 70 > x_bull and img_y1 < y_bull + 70 and img_y1 + 70 > y_bull:
         score += 1
@@ -171,13 +169,15 @@ while True:
         img_y = 619
 
         
-    # text = font2.render(score, True, (0,0,225))
-    # screen.blit(text, (0, 0))
-    # text = font.render("Welcome", True, (0, 255, 0))
-    # screen.blit(text, (455, 200))
-    # text = font2.render("Options", True, (0,0,255))
-    # screen.blit(text, (480, 350))
-    # text = font2.render("Exit", True, (255, 0, 0))
-    # screen.blit(text, (505, 380))
+    text = font2.render("Score: ", True, (0,255,0))
+    screen.blit(text, (0, 0))
+    text1 = font2.render(str(score), True, (0, 255, 0))
+    screen.blit(text1, (85, 0))
+
+    if score >= 20:
+        speed = 0
+        speed2 = 0
+        text3 = font.render("You Win", True, (0, 0, 255))
+        screen.blit(text3, (350, 230))
 
     pygame.display.update()
